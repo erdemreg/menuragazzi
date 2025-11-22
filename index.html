@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ragazzi Gastro Meyhane - Menü</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #1a0000 0%, #2d0000 50%, #1a0000 100%);
+            color: #f5f5f5;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: rgba(20, 0, 0, 0.9);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
+            border: 2px solid #8b6914;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 30px;
+            border-bottom: 3px solid #d4af37;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            color: #d4af37;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            margin-bottom: 10px;
+            letter-spacing: 3px;
+        }
+
+        .header .subtitle {
+            font-size: 1.3em;
+            color: #c9a961;
+            font-style: italic;
+            letter-spacing: 2px;
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section-title {
+            font-size: 2.2em;
+            color: #d4af37;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #8b6914;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 5px;
+            height: 40px;
+            background: linear-gradient(to bottom, #d4af37, #8b6914);
+            border-radius: 3px;
+        }
+
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 15px 0;
+            border-bottom: 1px dotted rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            background: rgba(212, 175, 55, 0.1);
+            padding-left: 10px;
+            border-radius: 5px;
+        }
+
+        .menu-item-name {
+            flex: 1;
+            font-size: 1.1em;
+            color: #f5f5f5;
+            font-weight: 500;
+        }
+
+        .menu-item-price {
+            font-size: 1.2em;
+            color: #d4af37;
+            font-weight: bold;
+            margin-left: 20px;
+            white-space: nowrap;
+        }
+
+        .menu-item-description {
+            font-size: 0.9em;
+            color: #c9a961;
+            font-style: italic;
+            margin-top: 5px;
+            padding-left: 20px;
+        }
+
+        .breakfast-special {
+            background: rgba(212, 175, 55, 0.15);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #d4af37;
+        }
+
+        .breakfast-special h3 {
+            color: #d4af37;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .breakfast-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .breakfast-item {
+            color: #f5f5f5;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            font-size: 0.95em;
+        }
+
+        .category-subtitle {
+            font-size: 1.3em;
+            color: #c9a961;
+            margin: 25px 0 15px 0;
+            padding-left: 15px;
+            border-left: 3px solid #d4af37;
+        }
+
+        .event-menu {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(139, 105, 20, 0.2));
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+            border: 2px solid #d4af37;
+            text-align: center;
+        }
+
+        .event-menu h3 {
+            color: #d4af37;
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .event-menu-items {
+            color: #f5f5f5;
+            font-size: 1.1em;
+            line-height: 2;
+            margin-bottom: 20px;
+        }
+
+        .event-menu-price {
+            font-size: 1.8em;
+            color: #d4af37;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: #1a0000;
+            }
+            .container {
+                background: white;
+                box-shadow: none;
+                border: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+            .container {
+                padding: 20px;
+            }
+            .menu-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .menu-item-price {
+                margin-left: 0;
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>RAGAZZI</h1>
+            <div class="subtitle">Gastro Meyhane</div>
+        </div>
+
+        <!-- Güne Başlangıç -->
+        <div class="section">
+            <div class="section-title">🥞 Güne Başlangıç</div>
+            <div class="breakfast-special">
+                <h3>Serpme Kahvaltı (Kişi Başı 600 ₺)</h3>
+                <div class="breakfast-items">
+                    <div class="breakfast-item">• Beyaz peynir</div>
+                    <div class="breakfast-item">• Tulum peyniri</div>
+                    <div class="breakfast-item">• Kaşar peyniri</div>
+                    <div class="breakfast-item">• Yeşillik tabağı</div>
+                    <div class="breakfast-item">• Salatalık, domates, biber</div>
+                    <div class="breakfast-item">• Siyah zeytin, yeşil zeytin</div>
+                    <div class="breakfast-item">• Tereyağı, bal, reçel, çikolata</div>
+                    <div class="breakfast-item">• Sigara böreği</div>
+                    <div class="breakfast-item">• Patates kızartması</div>
+                    <div class="breakfast-item">• Menemen</div>
+                    <div class="breakfast-item">• Salam</div>
+                    <div class="breakfast-item">• Mevsim meyveleri</div>
+                    <div class="breakfast-item">• Çay sınırsız</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mezeler -->
+        <div class="section">
+            <div class="section-title">🧆 Mezeler</div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Deniz Börülcesi</div>
+                </div>
+                <div class="menu-item-price">270 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Humus</div>
+                </div>
+                <div class="menu-item-price">270 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Fava</div>
+                </div>
+                <div class="menu-item-price">270 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Yaprak Sarma</div>
+                </div>
+                <div class="menu-item-price">200 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Yoğurtlu</div>
+                </div>
+                <div class="menu-item-price">200 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Şakşuka</div>
+                </div>
+                <div class="menu-item-price">270 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Girit Ezmesi</div>
+                </div>
+                <div class="menu-item-price">270 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Ezme Peynir</div>
+                </div>
+                <div class="menu-item-price">140 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Yoğurtlu Semizotu</div>
+                </div>
+                <div class="menu-item-price">270 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Havuç Tarator</div>
+                </div>
+                <div class="menu-item-price">270 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Süslü Ezme</div>
+                </div>
+                <div class="menu-item-price">270 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Patlıcan Atom</div>
+                </div>
+                <div class="menu-item-price">270 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Ahtapot</div>
+                </div>
+                <div class="menu-item-price">900 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Levrek Marin</div>
+                </div>
+                <div class="menu-item-price">1.400 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Arnavut Ciğeri</div>
+                </div>
+                <div class="menu-item-price">350 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Karides</div>
+                </div>
+                <div class="menu-item-price">370 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Midye</div>
+                </div>
+                <div class="menu-item-price">270 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Antipolyo</div>
+                </div>
+                <div class="menu-item-price">380 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Labne</div>
+                </div>
+                <div class="menu-item-price">300 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Füme Somon</div>
+                </div>
+                <div class="menu-item-price">500 ₺</div>
+            </div>
+        </div>
+
+        <!-- Ara Sıcaklar -->
+        <div class="section">
+            <div class="section-title">🍲 Ara Sıcaklar</div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Kalamar</div>
+                </div>
+                <div class="menu-item-price">590 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Karides</div>
+                </div>
+                <div class="menu-item-price">600 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Ahtapot Güveç</div>
+                </div>
+                <div class="menu-item-price">870 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Paçanga Böreği</div>
+                </div>
+                <div class="menu-item-price">300 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Balık Simit</div>
+                </div>
+                <div class="menu-item-price">300 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Tereyağlı Istakoz Mantı</div>
+                </div>
+                <div class="menu-item-price">370 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Mücver</div>
+                </div>
+                <div class="menu-item-price">270 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Kiremitte Mantar</div>
+                </div>
+                <div class="menu-item-price">300 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Brokoli Fırın</div>
+                </div>
+                <div class="menu-item-price">300 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Kadayıflı Karides</div>
+                </div>
+                <div class="menu-item-price">700 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Sıcak Peynir</div>
+                </div>
+                <div class="menu-item-price">300 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Hellim Izgara</div>
+                </div>
+                <div class="menu-item-price">270 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Pastırmalı Humus</div>
+                </div>
+                <div class="menu-item-price">450 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Deniz Mahsüllü Börek</div>
+                </div>
+                <div class="menu-item-price">370 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Tereyağlı Yaprak Ciğer</div>
+                </div>
+                <div class="menu-item-price">700 ₺</div>
+            </div>
+        </div>
+
+        <!-- Ana Yemekler -->
+        <div class="section">
+            <div class="section-title">🍛 Ana Yemekler</div>
+            
+            <div class="category-subtitle">Kırmızı Etler</div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Saç Kavurma</div>
+                </div>
+                <div class="menu-item-price">770 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Mantar Soslu Bonfile</div>
+                </div>
+                <div class="menu-item-price">770 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Beğendili Soslu Antrikot</div>
+                </div>
+                <div class="menu-item-price">800 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Beğendili Köfte</div>
+                </div>
+                <div class="menu-item-price">650 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Izgara Kuzu Külbastı</div>
+                </div>
+                <div class="menu-item-price">700 ₺</div>
+            </div>
+
+            <div class="category-subtitle">Tavuk & Tifed</div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Tavuk Kanat</div>
+                </div>
+                <div class="menu-item-price">600 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Tavuk Şiş</div>
+                </div>
+                <div class="menu-item-price">600 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Soslu Tavuk</div>
+                </div>
+                <div class="menu-item-price">600 ₺</div>
+            </div>
+
+            <div class="category-subtitle">Balıklar</div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Levrek</div>
+                </div>
+                <div class="menu-item-price">700 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Çupra</div>
+                </div>
+                <div class="menu-item-price">700 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Hamsi</div>
+                </div>
+                <div class="menu-item-price">550 ₺</div>
+            </div>
+        </div>
+
+        <!-- Tatlılar -->
+        <div class="section">
+            <div class="section-title">🍰 Tatlılar</div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Dağazisi Özel Sufle (1 Küre Dondurma)</div>
+                </div>
+                <div class="menu-item-price">350 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Sepme Meyve Tabağı</div>
+                </div>
+                <div class="menu-item-price">450 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Sepme Kuruyemiş Tabağı</div>
+                </div>
+                <div class="menu-item-price">450 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Çikolata – Jelibon</div>
+                </div>
+                <div class="menu-item-price">200 ₺</div>
+            </div>
+        </div>
+
+        <!-- Alkoller -->
+        <div class="section">
+            <div class="section-title">🍸 Alkoller</div>
+            
+            <div class="category-subtitle">Rakılar</div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Efe Gold 20 cl</div>
+                </div>
+                <div class="menu-item-price">1.700 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Efe Gold 35 cl</div>
+                </div>
+                <div class="menu-item-price">2.500 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Efe Gold 50 cl</div>
+                </div>
+                <div class="menu-item-price">3.000 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Efe Gold 70 cl</div>
+                </div>
+                <div class="menu-item-price">3.700 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Efe Gold 100 cl</div>
+                </div>
+                <div class="menu-item-price">4.500 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Beylerbeyi Gobi 20 cl</div>
+                </div>
+                <div class="menu-item-price">1.500 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Beylerbeyi Gobi 35 cl</div>
+                </div>
+                <div class="menu-item-price">2.500 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Beylerbeyi Gobi 50 cl</div>
+                </div>
+                <div class="menu-item-price">3.000 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Beylerbeyi Gobi 70 cl</div>
+                </div>
+                <div class="menu-item-price">3.700 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Beylerbeyi Gobi 100 cl</div>
+                </div>
+                <div class="menu-item-price">4.500 ₺</div>
+            </div>
+        </div>
+
+        <!-- Viskiler & Diğer Alkoller -->
+        <div class="section">
+            <div class="section-title">🥃 Viskiler & Diğer Alkoller</div>
+            
+            <div class="category-subtitle">Viski</div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Red Label 35 cl</div>
+                </div>
+                <div class="menu-item-price">2.570 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Red Label 70 cl</div>
+                </div>
+                <div class="menu-item-price">3.870 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Red Label 100 cl</div>
+                </div>
+                <div class="menu-item-price">5.150 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Jack Daniel's 35 cl</div>
+                </div>
+                <div class="menu-item-price">2.640 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Jack Daniel's 70 cl</div>
+                </div>
+                <div class="menu-item-price">3.950 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Jack Daniel's 100 cl</div>
+                </div>
+                <div class="menu-item-price">5.490 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Chivas Regal 35 cl</div>
+                </div>
+                <div class="menu-item-price">2.490 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Chivas Regal 70 cl</div>
+                </div>
+                <div class="menu-item-price">3.670 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Chivas Regal 100 cl</div>
+                </div>
+                <div class="menu-item-price">5.150 ₺</div>
+            </div>
+
+            <div class="category-subtitle">Vodka</div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Absolut 35 cl</div>
+                </div>
+                <div class="menu-item-price">2.470 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Absolut 70 cl</div>
+                </div>
+                <div class="menu-item-price">3.870 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Absolut 100 cl</div>
+                </div>
+                <div class="menu-item-price">5.270 ₺</div>
+            </div>
+
+            <div class="category-subtitle">Tekila</div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Olmeca 35 cl</div>
+                </div>
+                <div class="menu-item-price">2.900 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Olmeca 70 cl</div>
+                </div>
+                <div class="menu-item-price">3.940 ₺</div>
+            </div>
+        </div>
+
+        <!-- Şaraplar -->
+        <div class="section">
+            <div class="section-title">🍷 Şaraplar</div>
+            
+            <div class="category-subtitle">Kırmızı</div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Buzbağ Boğazkere / Öküzgözü</div>
+                </div>
+                <div class="menu-item-price">2.100 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Egeo Cabernet Sauvignon</div>
+                </div>
+                <div class="menu-item-price">3.150 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Kavaklıdere Yakut</div>
+                </div>
+                <div class="menu-item-price">3.000 ₺</div>
+            </div>
+
+            <div class="category-subtitle">Beyaz</div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Egeo Sauvignon Blanc</div>
+                </div>
+                <div class="menu-item-price">3.000 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Buzbağ Emir Narince</div>
+                </div>
+                <div class="menu-item-price">2.100 ₺</div>
+            </div>
+
+            <div class="category-subtitle">Rose</div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Kavaklıdere Egeo Rose</div>
+                </div>
+                <div class="menu-item-price">3.100 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Casal Mendes</div>
+                </div>
+                <div class="menu-item-price">2.870 ₺</div>
+            </div>
+        </div>
+
+        <!-- Kokteyller & Tekli/Duble İçkiler -->
+        <div class="section">
+            <div class="section-title">🍹 Kokteyller & Tekli/Duble İçkiler</div>
+            
+            <div class="category-subtitle">Tek / Duble Seçenekler</div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Tek Vodka</div>
+                </div>
+                <div class="menu-item-price">300 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Duble Vodka</div>
+                </div>
+                <div class="menu-item-price">600 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Tek Viski</div>
+                </div>
+                <div class="menu-item-price">300 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Duble Viski</div>
+                </div>
+                <div class="menu-item-price">600 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Tek Cin</div>
+                </div>
+                <div class="menu-item-price">300 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Duble Cin</div>
+                </div>
+                <div class="menu-item-price">600 ₺</div>
+            </div>
+
+            <div class="category-subtitle">Kokteyller</div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Pina Colada</div>
+                </div>
+                <div class="menu-item-price">550 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Aperol Spritz</div>
+                </div>
+                <div class="menu-item-price">550 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Blue Lagoon</div>
+                </div>
+                <div class="menu-item-price">550 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Mojito</div>
+                </div>
+                <div class="menu-item-price">550 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Long Island Ice Tea</div>
+                </div>
+                <div class="menu-item-price">650 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Baileys Coffee</div>
+                </div>
+                <div class="menu-item-price">600 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Dağazisi Özel Kokteyl</div>
+                </div>
+                <div class="menu-item-price">600 ₺</div>
+            </div>
+        </div>
+
+        <!-- İçecekler -->
+        <div class="section">
+            <div class="section-title">🧃 İçecekler</div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Cola / Fanta / Sprite</div>
+                </div>
+                <div class="menu-item-price">120 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Soda</div>
+                </div>
+                <div class="menu-item-price">100 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Su</div>
+                </div>
+                <div class="menu-item-price">100 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Soğuk Çay</div>
+                </div>
+                <div class="menu-item-price">120 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Şalgam</div>
+                </div>
+                <div class="menu-item-price">120 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Meyve Suyu</div>
+                </div>
+                <div class="menu-item-price">120 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Salep</div>
+                </div>
+                <div class="menu-item-price">150 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Çay</div>
+                </div>
+                <div class="menu-item-price">70 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Türk Kahvesi</div>
+                </div>
+                <div class="menu-item-price">100 ₺</div>
+            </div>
+            <div class="menu-item">
+                <div>
+                    <div class="menu-item-name">Duble Su (100 cl)</div>
+                </div>
+                <div class="menu-item-price">200 ₺</div>
+            </div>
+        </div>
+
+        <!-- Kişi Başı Menü -->
+        <div class="event-menu">
+            <h3>🍽️ Kişi Başı Menü</h3>
+            <div class="event-menu-items">
+                <div>Zeytinyağlı başlangıç</div>
+                <div>Ara sıcak</div>
+                <div>Ana yemek (Köfte / Tavuk şiş)</div>
+                <div>Meyve tabağı</div>
+                <div>Limitsiz alkolsüz içecek</div>
+            </div>
+            <div class="event-menu-price">Kişi Başı 1.400 ₺</div>
+            <div style="margin-top: 15px; font-size: 0.9em; color: #c9a961; font-style: italic;">(Etkinlik için örnek)</div>
+        </div>
+    </div>
+</body>
+</html>
